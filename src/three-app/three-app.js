@@ -1,5 +1,8 @@
 import * as THREE from "three";
 
+import vertexShaderString from "./shaders/vertex-shader.glsl?raw";
+import fragmentShaderString from "./shaders/fragment-shader.glsl?raw";
+
 export const threeAppInit = async () => {
   const container = document.getElementById("three-app-root");
 
@@ -30,9 +33,12 @@ export const threeAppInit = async () => {
   });
 
   const geometry = new THREE.BoxGeometry(1, 1, 1);
-  const material = new THREE.MeshBasicMaterial({ color: "red" });
-  const cube = new THREE.Mesh(geometry, material);
-  scene.add(cube);
+  const material = new THREE.ShaderMaterial({
+    vertexShader: vertexShaderString,
+    fragmentShader: fragmentShaderString,
+  });
+  const box = new THREE.Mesh(geometry, material);
+  scene.add(box);
 
   const onWindowResizeHandler = () => {
     const w = container.offsetWidth;
