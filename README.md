@@ -1,8 +1,16 @@
-# React + Vite
+# Description
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A little [Three.js](https://threejs.org/) app with these features:
 
-Currently, two official plugins are available:
+* The project was scaffolded using [Vite](https://vitejs.dev/)
+* Uses custom shaders that are imported as static assets
+  * See [Importing Asset as String](https://vitejs.dev/guide/assets#importing-asset-as-string)
+* [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/)
+* [MUI](https://mui.com/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# TODO
+
+* Extend the app to support a few different shapes and a few different colours
+* Allow the initial shape and colour to be specified via query params
+* Add a settings panel to allow the shape and colour to be changed
+* Allow the shape and colour to be changed via the keyboard too

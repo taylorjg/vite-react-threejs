@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
-import vertexShaderString from "./shaders/vertex-shader.glsl?raw";
-import fragmentShaderString from "./shaders/fragment-shader.glsl?raw";
+import vertexShader from "./shaders/vertex-shader.glsl?raw";
+import fragmentShader from "./shaders/fragment-shader.glsl?raw";
 
 export const threeAppInit = async () => {
   const container = document.getElementById("three-app-root");
@@ -25,20 +25,15 @@ export const threeAppInit = async () => {
     scene.visible = true;
   };
 
-  // const clock = new THREE.Clock();
-
   renderer.setAnimationLoop(() => {
-    // const deltaMs = clock.getDelta() * 1000;
     renderer.render(scene, camera);
   });
 
-  const geometry = new THREE.BoxGeometry(1, 1, 1);
-  const material = new THREE.ShaderMaterial({
-    vertexShader: vertexShaderString,
-    fragmentShader: fragmentShaderString,
-  });
-  const box = new THREE.Mesh(geometry, material);
-  scene.add(box);
+  const geometry = new THREE.PlaneGeometry(1, 1);
+  const shaderMaterialParameters = { vertexShader, fragmentShader };
+  const material = new THREE.ShaderMaterial(shaderMaterialParameters);
+  const mesh = new THREE.Mesh(geometry, material);
+  scene.add(mesh);
 
   const onWindowResizeHandler = () => {
     const w = container.offsetWidth;
