@@ -4,6 +4,7 @@ import {
   createTheme,
   ThemeProvider,
   CssBaseline,
+  GlobalStyles,
   responsiveFontSizes,
 } from "@mui/material";
 
@@ -13,6 +14,8 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
 import { App } from "./App.jsx";
+import { threeAppInit } from "@app/three-app/three-app";
+import { globalStyles } from "./global-styles.js";
 
 const darkTheme = responsiveFontSizes(
   createTheme({
@@ -22,13 +25,20 @@ const darkTheme = responsiveFontSizes(
   })
 );
 
-const root = document.getElementById("root");
+const main = async () => {
+  const threeAppActions = await threeAppInit();
 
-createRoot(root).render(
-  <StrictMode>
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-      <App />
-    </ThemeProvider>
-  </StrictMode>
-);
+  createRoot(document.getElementById("react-root")).render(
+    <StrictMode>
+      <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
+        <GlobalStyles styles={globalStyles} />
+        <App threeAppActions={threeAppActions} />
+      </ThemeProvider>
+    </StrictMode>
+  );
+
+  threeAppActions.ready();
+};
+
+main();
