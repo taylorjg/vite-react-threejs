@@ -13,7 +13,8 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
-import { threeAppInit } from "@app/three-app/three-app";
+import { threeAppInit } from "@app/three-app";
+import { ThreeAppActionsProvider } from "@app/contexts";
 
 import { App } from "./App.jsx";
 import { globalStyles } from "./global-styles.js";
@@ -34,7 +35,9 @@ const main = async () => {
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
         <GlobalStyles styles={globalStyles} />
-        <App threeAppActions={threeAppActions} />
+        <ThreeAppActionsProvider threeAppActions={threeAppActions}>
+          <App />
+        </ThreeAppActionsProvider>
       </ThemeProvider>
     </StrictMode>
   );
