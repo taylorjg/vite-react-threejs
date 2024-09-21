@@ -3,6 +3,25 @@ import * as THREE from "three";
 import vertexShader from "./shaders/vertex-shader.glsl?raw";
 import fragmentShader from "./shaders/fragment-shader.glsl?raw";
 
+const GEOMETRIES = [
+  new THREE.PlaneGeometry(1, 1), // square
+  new THREE.ShapeGeometry(), // triangle
+  new THREE.CircleGeometry(0.5, 100), // circle
+];
+
+const COLOURS = [
+  new THREE.Color("red"),
+  new THREE.Color("orange"),
+  new THREE.Color("yellow"),
+  new THREE.Color("green"),
+  new THREE.Color("blue"),
+  new THREE.Color("indigo"),
+  new THREE.Color("violet"),
+];
+
+const currentGeometryIndex = 2;
+const currentColourIndex = 6;
+
 export const threeAppInit = async () => {
   const container = document.getElementById("three-app-root");
 
@@ -29,10 +48,16 @@ export const threeAppInit = async () => {
     renderer.render(scene, camera);
   });
 
-  const geometry = new THREE.PlaneGeometry(1, 1);
-  const shaderMaterialParameters = { vertexShader, fragmentShader };
+  const shaderMaterialParameters = {
+    vertexShader,
+    fragmentShader,
+    uniforms: {
+      colour: { value: COLOURS[currentColourIndex] },
+    },
+  };
+
   const material = new THREE.ShaderMaterial(shaderMaterialParameters);
-  const mesh = new THREE.Mesh(geometry, material);
+  const mesh = new THREE.Mesh(GEOMETRIES[currentGeometryIndex], material);
   scene.add(mesh);
 
   const onWindowResizeHandler = () => {
