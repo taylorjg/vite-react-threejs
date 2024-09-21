@@ -3,10 +3,15 @@ import * as THREE from "three";
 import vertexShader from "./shaders/vertex-shader.glsl?raw";
 import fragmentShader from "./shaders/fragment-shader.glsl?raw";
 
-const GEOMETRIES = [
-  new THREE.PlaneGeometry(1, 1), // square
-  new THREE.ShapeGeometry(), // triangle
-  new THREE.CircleGeometry(0.5, 100), // circle
+const SQUARE_GEOMETRY = new THREE.PlaneGeometry(1, 1);
+const TRIANGLE_GEOMETRY = new THREE.ShapeGeometry();
+const CIRCLE_GEOMETRY = new THREE.CircleGeometry(0.5, 100);
+
+// eslint-disable-next-line prettier/prettier
+const SHAPES = [
+  SQUARE_GEOMETRY,
+  TRIANGLE_GEOMETRY,
+  CIRCLE_GEOMETRY
 ];
 
 const COLOURS = [
@@ -19,8 +24,14 @@ const COLOURS = [
   new THREE.Color("violet"),
 ];
 
-const currentGeometryIndex = 2;
-const currentColourIndex = 6;
+let currentShapeIndex = 2;
+let currentColourIndex = 6;
+
+const mod = (x, m) => {
+  if (x >= m) return 0;
+  if (x < 0) return m - 1;
+  return x;
+};
 
 export const threeAppInit = async () => {
   const container = document.getElementById("three-app-root");
@@ -57,7 +68,7 @@ export const threeAppInit = async () => {
   };
 
   const material = new THREE.ShaderMaterial(shaderMaterialParameters);
-  const mesh = new THREE.Mesh(GEOMETRIES[currentGeometryIndex], material);
+  const mesh = new THREE.Mesh(SHAPES[currentShapeIndex], material);
   scene.add(mesh);
 
   const onWindowResizeHandler = () => {
@@ -70,7 +81,33 @@ export const threeAppInit = async () => {
 
   window.addEventListener("resize", onWindowResizeHandler);
 
+  const cycleShapeForwards = () => {
+    currentShapeIndex = mod(currentColourIndex + 1, SHAPES.length);
+  };
+
+  const cycleShapeBackwards = () => {
+    currentShapeIndex = mod(currentColourIndex - 1, SHAPES.length);
+  };
+
+  const cycleColourForwards = () => {
+    console.log({ currentColourIndex });
+    currentColourIndex = mod(currentColourIndex + 1, COLOURS.length);
+    console.log({ currentColourIndex });
+    mesh.material.uniforms.colour.value = COLOURS[currentColourIndex];
+  };
+
+  const cycleColourBackwards = () => {
+    console.log({ currentColourIndex });
+    currentColourIndex = mod(currentColourIndex - 1, COLOURS.length);
+    console.log({ currentColourIndex });
+    mesh.material.uniforms.colour.value = COLOURS[currentColourIndex];
+  };
+
   return {
     ready,
+    cycleShapeForwards,
+    cycleShapeBackwards,
+    cycleColourForwards,
+    cycleColourBackwards,
   };
 };
