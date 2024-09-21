@@ -4,6 +4,7 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: "/vite-react-threejs",
   plugins: [react()],
   resolve: {
     // eslint-disable-next-line no-undef
