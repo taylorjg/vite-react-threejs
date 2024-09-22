@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { Version } from "@app/components";
+import { SettingsButton, Version } from "@app/components";
 import { useThreeAppActions } from "@app/contexts";
 
 export const App = () => {
@@ -41,6 +41,7 @@ export const App = () => {
 
   return (
     <>
+      <SettingsButton />
       <Version />
     </>
   );
