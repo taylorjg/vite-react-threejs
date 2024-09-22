@@ -12,9 +12,6 @@ export const StyledSettingsPanelHeader = styled.div`
   align-items: center;
   justify-content: space-between;
   margin: 0.5rem 1rem;
-  svg {
-    cursor: pointer;
-  }
 `;
 
 export const StyledSettingsPanelBody = styled.div`

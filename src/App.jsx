@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 
 import { Caption, SettingsButton, Version } from "@app/components";
-import { useThreeAppActions } from "@app/contexts";
+import { useThreeAppActions, useOtherSettings } from "@app/hooks";
 
 export const App = () => {
   const threeAppActions = useThreeAppActions();
+  const { setShowCaption } = useOtherSettings();
 
   useEffect(() => {
     const onKeyDown = (e) => {
@@ -21,8 +22,11 @@ export const App = () => {
         case "S":
           return threeAppActions.cycleShapeBackwards();
 
+        case "n":
+          return setShowCaption((value) => !value);
+
         default:
-          break;
+          return;
       }
     };
 
@@ -37,7 +41,7 @@ export const App = () => {
     addHandler();
 
     return removeHandler;
-  }, [threeAppActions]);
+  }, [threeAppActions, setShowCaption]);
 
   return (
     <>

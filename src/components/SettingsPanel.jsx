@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 
-import { useThreeAppActions } from "@app/contexts";
+import { useThreeAppActions, useOtherSettings } from "@app/hooks";
 
 import {
   StyledSettingsPanel,
@@ -35,11 +35,6 @@ const COLOUR_OPTIONS = [
 ];
 
 const FORM_LABEL_SX = { sx: { mb: "0.5rem" } };
-
-const SETTING_PROP_TYPES = {
-  value: PropTypes.number.isRequired,
-  setValue: PropTypes.func.isRequired,
-};
 
 const ShapeSetting = ({ value, setValue }) => {
   const handleChange = (event) => {
@@ -70,7 +65,10 @@ const ShapeSetting = ({ value, setValue }) => {
   );
 };
 
-ShapeSetting.propTypes = SETTING_PROP_TYPES;
+ShapeSetting.propTypes = {
+  value: PropTypes.number.isRequired,
+  setValue: PropTypes.func.isRequired,
+};
 
 const ColourSetting = ({ value, setValue }) => {
   const handleChange = (event) => {
@@ -101,7 +99,10 @@ const ColourSetting = ({ value, setValue }) => {
   );
 };
 
-ColourSetting.propTypes = SETTING_PROP_TYPES;
+ColourSetting.propTypes = {
+  value: PropTypes.number.isRequired,
+  setValue: PropTypes.func.isRequired,
+};
 
 const CaptionSetting = ({ value, setValue }) => {
   const handleChange = (event) => {
@@ -118,7 +119,7 @@ const CaptionSetting = ({ value, setValue }) => {
           <Switch
             aria-labelledby="caption-label"
             size="small"
-            checked={Boolean(value)}
+            checked={value}
             onClick={handleChange}
           />
         }
@@ -128,11 +129,15 @@ const CaptionSetting = ({ value, setValue }) => {
   );
 };
 
-CaptionSetting.propTypes = SETTING_PROP_TYPES;
+CaptionSetting.propTypes = {
+  value: PropTypes.bool.isRequired,
+  setValue: PropTypes.func.isRequired,
+};
 
 export const SettingsPanel = () => {
   const threeAppActions = useThreeAppActions();
   const { currentShapeIndex, currentColourIndex } = threeAppActions.settings;
+  const { showCaption, setShowCaption } = useOtherSettings();
 
   return (
     <StyledSettingsPanel>
@@ -149,7 +154,7 @@ export const SettingsPanel = () => {
           value={currentColourIndex}
           setValue={threeAppActions.showColour}
         />
-        <CaptionSetting value={0} setValue={() => {}} />
+        <CaptionSetting value={showCaption} setValue={setShowCaption} />
       </StyledSettingsPanelBody>
     </StyledSettingsPanel>
   );
