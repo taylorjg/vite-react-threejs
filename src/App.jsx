@@ -10,17 +10,17 @@ export const App = () => {
   useEffect(() => {
     const onKeyDown = (e) => {
       switch (e.key) {
-        case "c":
-          return threeAppActions.cycleColourForwards();
-
-        case "C":
-          return threeAppActions.cycleColourBackwards();
-
         case "s":
           return threeAppActions.cycleShapeForwards();
 
         case "S":
           return threeAppActions.cycleShapeBackwards();
+
+        case "c":
+          return threeAppActions.cycleColourForwards();
+
+        case "C":
+          return threeAppActions.cycleColourBackwards();
 
         case "n":
           return toggleCaption();

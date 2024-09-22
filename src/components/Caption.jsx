@@ -1,15 +1,14 @@
 import { Typography } from "@mui/material";
 
-import { useThreeAppActions, useOtherSettings } from "@app/hooks";
+import { useThreeAppSettings, useOtherSettings } from "@app/hooks";
 import { StyledCaption } from "./Caption.styles";
 
 export const Caption = () => {
-  const { settings } = useThreeAppActions();
+  const { currentShape, currentColour } = useThreeAppSettings();
   const { showCaption } = useOtherSettings();
 
   if (!showCaption) return null;
 
-  const { currentShape, currentColour } = settings;
   const caption = `${currentShape.name} (${currentColour.name})`;
 
   return (

@@ -10,7 +10,11 @@ import {
   Typography,
 } from "@mui/material";
 
-import { useThreeAppActions, useOtherSettings } from "@app/hooks";
+import {
+  useThreeAppActions,
+  useThreeAppSettings,
+  useOtherSettings,
+} from "@app/hooks";
 
 import {
   StyledSettingsPanel,
@@ -136,13 +140,13 @@ CaptionSetting.propTypes = {
 
 export const SettingsPanel = () => {
   const threeAppActions = useThreeAppActions();
-  const { currentShapeIndex, currentColourIndex } = threeAppActions.settings;
+  const { currentShapeIndex, currentColourIndex } = useThreeAppSettings();
   const { showCaption, setShowCaption } = useOtherSettings();
 
   return (
     <StyledSettingsPanel>
       <StyledSettingsPanelHeader>
-        <Typography variant="h6">Settings</Typography>
+        <Typography variant="h4">Settings</Typography>
       </StyledSettingsPanelHeader>
       <Divider />
       <StyledSettingsPanelBody>
