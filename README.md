@@ -10,7 +10,7 @@ A little [Three.js](https://threejs.org/) app with these features:
 
 # TODO
 
-* Extend the app to support a few different shapes and a few different colours
-* Allow the initial shape and colour to be specified via query params
-* Add a settings panel to allow the shape and colour to be changed
-* Allow the shape and colour to be changed via the keyboard too
+* [x] Extend the app to support a few different shapes and a few different colours
+* [x] Allow the shape and colour to be changed via the keyboard
+* [x] Add a settings panel to allow the shape and colour to be changed
+* [ ] Allow the initial shape and colour to be specified via query params
