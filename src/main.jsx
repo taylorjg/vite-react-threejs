@@ -28,7 +28,14 @@ const darkTheme = responsiveFontSizes(
 );
 
 const main = async () => {
-  const threeAppActions = await threeAppInit();
+  // TODO: get these from query string params
+  const initialShapeIndex = 0;
+  const initialColourIndex = 0;
+
+  const threeAppActions = await threeAppInit({
+    initialShapeIndex,
+    initialColourIndex,
+  });
 
   createRoot(document.getElementById("react-root")).render(
     <StrictMode>

@@ -1,6 +1,6 @@
 {
   "name": "vite-react-threejs",
-  "description": "Demo web app combining three.js and React + Material UI",
+  "description": "Demo web app combining three.js with React + Material UI",
   "private": true,
   "version": "0.0.4",
   "type": "module",
