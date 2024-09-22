@@ -5,7 +5,7 @@ import { useThreeAppActions, useOtherSettings } from "@app/hooks";
 
 export const App = () => {
   const threeAppActions = useThreeAppActions();
-  const { setShowCaption } = useOtherSettings();
+  const { toggleCaption } = useOtherSettings();
 
   useEffect(() => {
     const onKeyDown = (e) => {
@@ -23,7 +23,7 @@ export const App = () => {
           return threeAppActions.cycleShapeBackwards();
 
         case "n":
-          return setShowCaption((value) => !value);
+          return toggleCaption();
 
         default:
           return;
@@ -41,7 +41,7 @@ export const App = () => {
     addHandler();
 
     return removeHandler;
-  }, [threeAppActions, setShowCaption]);
+  }, [threeAppActions, toggleCaption]);
 
   return (
     <>

@@ -9,9 +9,14 @@ export const OtherSettingsProvider = ({
 }) => {
   const [showCaption, setShowCaption] = useState(initialCaptionState);
 
+  const toggleCaption = () => {
+    setShowCaption((value) => !value);
+  };
+
   const otherSettings = {
     showCaption,
     setShowCaption,
+    toggleCaption,
   };
 
   return (
