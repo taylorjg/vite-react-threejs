@@ -118,7 +118,7 @@ const CaptionSetting = ({ value, setValue }) => {
           <Switch
             aria-labelledby="caption-label"
             size="small"
-            checked={value}
+            checked={Boolean(value)}
             onClick={handleChange}
           />
         }
@@ -132,6 +132,7 @@ CaptionSetting.propTypes = SETTING_PROP_TYPES;
 
 export const SettingsPanel = () => {
   const threeAppActions = useThreeAppActions();
+  const { currentShapeIndex, currentColourIndex } = threeAppActions.settings;
 
   return (
     <StyledSettingsPanel>
@@ -140,8 +141,14 @@ export const SettingsPanel = () => {
       </StyledSettingsPanelHeader>
       <Divider />
       <StyledSettingsPanelBody>
-        <ShapeSetting value={0} setValue={threeAppActions.showShape} />
-        <ColourSetting value={0} setValue={threeAppActions.showColour} />
+        <ShapeSetting
+          value={currentShapeIndex}
+          setValue={threeAppActions.showShape}
+        />
+        <ColourSetting
+          value={currentColourIndex}
+          setValue={threeAppActions.showColour}
+        />
         <CaptionSetting value={0} setValue={() => {}} />
       </StyledSettingsPanelBody>
     </StyledSettingsPanel>

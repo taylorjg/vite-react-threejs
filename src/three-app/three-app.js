@@ -1,3 +1,4 @@
+import EventEmitter from "events";
 import * as THREE from "three";
 
 import vertexShader from "./shaders/vertex-shader.glsl?raw";
@@ -50,6 +51,8 @@ const COLOURS = [
   makeColourEntry("Violet"),
 ];
 
+const SETTINGS_CHANGED_EVENT_NAME = "settings-changed";
+
 let currentShapeIndex = 0;
 let currentColourIndex = 0;
 
@@ -61,6 +64,8 @@ const wrapIndex = (x, m) => {
 
 export const threeAppInit = async (options = {}) => {
   const { initialShapeIndex = 0, initialColourIndex = 0 } = options;
+
+  const eventEmitter = new EventEmitter();
 
   const container = document.getElementById("three-app-root");
 
@@ -112,6 +117,8 @@ export const threeAppInit = async (options = {}) => {
 
     shapeEntry.mesh.visible = true;
     shapeEntry.mesh.material.uniforms.colour.value = colourEntry.colour;
+
+    emitSettingsChangedEvent();
   };
 
   const showColour = (index) => {
@@ -139,6 +146,30 @@ export const threeAppInit = async (options = {}) => {
     showColour(newColourIndex);
   };
 
+  const getSettings = () => {
+    const currentShape = SHAPES[currentShapeIndex];
+    const currentColour = COLOURS[currentColourIndex];
+
+    return {
+      currentShapeIndex,
+      currentColourIndex,
+      currentShape,
+      currentColour,
+    };
+  };
+
+  const addSettingsChangedListener = (listener) => {
+    eventEmitter.on(SETTINGS_CHANGED_EVENT_NAME, listener);
+  };
+
+  const removeSettingsChangedListener = (listener) => {
+    eventEmitter.off(SETTINGS_CHANGED_EVENT_NAME, listener);
+  };
+
+  const emitSettingsChangedEvent = () => {
+    eventEmitter.emit(SETTINGS_CHANGED_EVENT_NAME, getSettings());
+  };
+
   showShape(initialShapeIndex);
   showColour(initialColourIndex);
 
@@ -150,5 +181,8 @@ export const threeAppInit = async (options = {}) => {
     cycleColourBackwards,
     showShape,
     showColour,
+    getSettings,
+    addSettingsChangedListener,
+    removeSettingsChangedListener,
   };
 };
