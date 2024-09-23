@@ -8,9 +8,9 @@ A little [Three.js](https://threejs.org/) app with these features:
 * [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/)
 * [MUI](https://mui.com/)
 
-# Query string params
+# Query params
 
-| Query string param | Description | Value |
+| Query param | Description | Value |
 | ------------------ | ----------- | ----- |
 | shape | Which shape to show initially | 0 = square<br />1 = triangle<br />2 = circle<br />  |
 | colour | Which colour to show initially | 0 = red<br />1 = orange<br />2 = yellow<br />3 = green<br />4 = blue<br />5 = indigo<br />6 = violet |
