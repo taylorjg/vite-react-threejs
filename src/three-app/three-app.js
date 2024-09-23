@@ -95,7 +95,7 @@ export const threeAppInit = async (options = {}) => {
     scene.add(shapeEntry.mesh);
   }
 
-  const onWindowResizeHandler = () => {
+  const adjustToNewDimensions = () => {
     const w = container.offsetWidth;
     const h = container.offsetHeight;
     renderer.setSize(w, h);
@@ -103,7 +103,22 @@ export const threeAppInit = async (options = {}) => {
     camera.updateProjectionMatrix();
   };
 
+  const onWindowResizeHandler = () => {
+    console.log("[onWindowResizeHandler]");
+    adjustToNewDimensions();
+  };
+
   window.addEventListener("resize", onWindowResizeHandler);
+
+  const onScreenOrientationChangeHandler = () => {
+    console.log("[onScreenOrientationChangeHandler]");
+    adjustToNewDimensions();
+  };
+
+  screen.orientation.addEventListener(
+    "change",
+    onScreenOrientationChangeHandler
+  );
 
   const showShape = (index) => {
     for (const shapeEntry of SHAPES) {

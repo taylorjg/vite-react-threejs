@@ -4,7 +4,7 @@ export const StyledSettingsPanel = styled.div`
   margin: 0;
   padding: 0;
   height: 100%;
-  min-width: 20rem;
+  min-width: 15rem;
 `;
 
 export const StyledSettingsPanelHeader = styled.div`
