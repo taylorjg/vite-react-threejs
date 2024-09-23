@@ -62,8 +62,9 @@ const wrapIndex = (x, m) => {
   return x;
 };
 
-export const threeAppInit = async (options = {}) => {
-  const { initialShapeIndex = 0, initialColourIndex = 0 } = options;
+export const threeAppInit = async (settings = {}) => {
+  const initialShapeIndex = settings.shape ?? 0;
+  const initialColourIndex = settings.colour ?? 0;
 
   const eventEmitter = new EventEmitter();
 

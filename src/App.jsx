@@ -5,9 +5,11 @@ import { useThreeAppActions, useOtherSettings } from "@app/hooks";
 
 export const App = () => {
   const threeAppActions = useThreeAppActions();
-  const { toggleCaption } = useOtherSettings();
+  const { kioskMode, toggleCaption } = useOtherSettings();
 
   useEffect(() => {
+    if (kioskMode) return;
+
     const onKeyDown = (e) => {
       switch (e.key) {
         case "s":
@@ -41,12 +43,12 @@ export const App = () => {
     addHandler();
 
     return removeHandler;
-  }, [threeAppActions, toggleCaption]);
+  }, [threeAppActions, kioskMode, toggleCaption]);
 
   return (
     <>
       <Caption />
-      <SettingsButton />
+      {!kioskMode && <SettingsButton />}
       <Version />
     </>
   );

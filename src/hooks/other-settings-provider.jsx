@@ -3,17 +3,16 @@ import PropTypes from "prop-types";
 
 import { OtherSettingsContext } from "./other-settings-context";
 
-export const OtherSettingsProvider = ({
-  initialCaptionState = false,
-  children,
-}) => {
-  const [showCaption, setShowCaption] = useState(initialCaptionState);
+export const OtherSettingsProvider = ({ settings = {}, children }) => {
+  const { caption = false, kioskMode = false } = settings;
+  const [showCaption, setShowCaption] = useState(caption);
 
   const toggleCaption = () => {
     setShowCaption((value) => !value);
   };
 
   const otherSettings = {
+    kioskMode,
     showCaption,
     setShowCaption,
     toggleCaption,
@@ -27,6 +26,8 @@ export const OtherSettingsProvider = ({
 };
 
 OtherSettingsProvider.propTypes = {
-  initialCaptionState: PropTypes.bool,
+  settings: PropTypes.shape({
+    caption: PropTypes.bool,
+  }),
   children: PropTypes.node.isRequired,
 };
